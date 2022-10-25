@@ -1,3 +1,7 @@
+# Variables
+version_information:
+  version: '17'
+
 #Workflow name
 name: CI/CD Pipeline
 on:
@@ -19,7 +23,7 @@ jobs:
       - name: Set up JDK 17
         uses: actions/setup-java@v3
         with:
-          java-version: '17'
+          java-version: "{{version}}"
           distribution: 'adopt'
           cache: maven
       - name: Build with Maven
