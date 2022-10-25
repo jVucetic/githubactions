@@ -23,7 +23,7 @@ jobs:
       - name: Set up JDK 17
         uses: actions/setup-java@v3
         with:
-          java-version: $VERSION
+          java-version: ${{ env.VERSION }}
           distribution: 'adopt'
           cache: maven
       - name: Build with Maven
