@@ -14,7 +14,7 @@ on:
 jobs:
   #Test's job
   tests:
-    name: Unit tests
+    name: Build
     #Run on Ubuntu using the latest version
     runs-on: ubuntu-latest
     #Job's steps
@@ -34,7 +34,7 @@ jobs:
         uses: scacap/action-surefire-report@v1
 
       - name: Build with Maven And Integration Test
-        run: mvn clean install -Pci
+        run: mvn clean install -P
 
       - name: Publish Integration Test Report
         uses: scacap/action-surefire-report@v1
