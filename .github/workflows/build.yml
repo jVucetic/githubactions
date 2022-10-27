@@ -37,7 +37,7 @@ jobs:
 
       - name: Unit Test Report
         uses: phoenix-actions/test-reporting@v8
-        id: test-report               # Set ID reference for step
+        id: unit-test-report               # Set ID reference for step
         if: success() || failure()    # run this step even if previous step failed
         with:
           name: Integration Test Report           # Name of the check run which will be created
@@ -53,7 +53,7 @@ jobs:
 
       - name: Integration Test Report
         uses: phoenix-actions/test-reporting@v8
-        id: test-report               # Set ID reference for step
+        id: integration-test-report               # Set ID reference for step
         if: success() || failure()    # run this step even if previous step failed
         with:
           name: Integration Test Report         # Name of the check run which will be created
