@@ -29,8 +29,10 @@ jobs:
       - name: Build with Maven And skip tests
         run: mvn --batch-mode --update-snapshots verify -DskipTests
 
-      - name: Publish Unit Test Report
+      - name: Run Unit tests
         run: mvn verify -PunitTests
+
+      - name: Publish Unit Test Report
         if: ${{ always() }}
         uses: scacap/action-surefire-report@v1
 
