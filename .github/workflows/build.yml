@@ -37,8 +37,10 @@ jobs:
         uses: scacap/action-surefire-report@v1
 
 
-      - name: Publish Integration Test Report
+      - name: Run Integration tests
         run: mvn verify -PintegrationTests
+
+      - name: Publish Integration Test Report
         uses: scacap/action-surefire-report@v1
         with:
           check_name: integration_test_results
