@@ -22,7 +22,7 @@ jobs:
       checks: write
       issues: read
       pull-requests: write
-     # security-events: write
+      security-events: write
     steps:
       - uses: actions/checkout@v3
       - name: Set up JDK 11
@@ -39,8 +39,8 @@ jobs:
         with:
           languages: java
 
-     # - name: Autobuild
-    #    uses: github/codeql-action/autobuild@v2
+      - name: Autobuild
+        uses: github/codeql-action/autobuild@v2
 
       - name: Perform CodeQL Analysis
         uses: github/codeql-action/analyze@v2
