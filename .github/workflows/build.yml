@@ -14,13 +14,13 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    permissions:
-      id-token: write # required to use OIDC authentication
+ #   permissions:
+     # id-token: write # required to use OIDC authentication
      # contents: read
-      packages: write
+     # packages: write
      # checks: read
-      issues: read
-      pull-requests: write
+    #  issues: read
+    #  pull-requests: write
     steps:
       - uses: actions/checkout@v3
       - name: Set up JDK 11
