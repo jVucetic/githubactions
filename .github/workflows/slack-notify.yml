@@ -1,9 +1,9 @@
+name: Slack Notification Demo
 on:
   workflow_run:
     workflows: [ CI/CD Pipeline ]
     types:
       - completed
-name: Slack Notification Demo
 jobs:
   notify:
     runs-on: ubuntu-latest
