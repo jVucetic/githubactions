@@ -16,7 +16,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: Set up JDK 17
+      - name: Set up JDK 11
         uses: actions/setup-java@v3
         with:
           java-version: ${{ env.VERSION }}
@@ -32,16 +32,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Run Unit tests
-        run: mvn install -PunitTests
-
-      - name: Publish Unit Test Report
-        if: ${{ always() }}
-        uses: scacap/action-surefire-report@v1
+        run: mvn clean package -PunitTests
 
       - name: Run Integration tests
-        run: mvn install -PintegrationTests
+        run: mvn clean package -PintegrationTests
 
-      - name: Publish Integration Test Report
+      - name: Publish Test Report
         if: ${{ always() }}
         uses: scacap/action-surefire-report@v1
 
