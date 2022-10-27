@@ -31,11 +31,12 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v3
       - name: Run Unit tests
-        run: mvn clean package -PunitTests
+        run: mvn verify -PunitTests
 
       - name: Run Integration tests
-        run: mvn clean package -PintegrationTests
+        run: mvn verify -PintegrationTests
 
       - name: Publish Test Report
         if: ${{ always() }}
