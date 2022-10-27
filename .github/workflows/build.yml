@@ -26,17 +26,17 @@ jobs:
           java-version: ${{ env.VERSION }}
           distribution: 'adopt'
           cache: maven
-      - name: Build with Maven
-        run: mvn --batch-mode --update-snapshots verify
+      - name: Build with Maven And skip tests
+        run: mvn --batch-mode --update-snapshots verify -DskipTests
 
       - name: Publish Unit Test Report
+        run: mvn verify -PunitTests
         if: ${{ always() }}
         uses: scacap/action-surefire-report@v1
 
-      - name: Build with Maven And Integration Test
-        run: mvn clean install -P
 
       - name: Publish Integration Test Report
+        run: mvn verify -PintegrationTests
         uses: scacap/action-surefire-report@v1
         with:
           check_name: integration_test_results
