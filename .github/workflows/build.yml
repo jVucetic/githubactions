@@ -62,8 +62,7 @@ jobs:
         if: ${{ always() }}
         uses: scacap/action-surefire-report@v1
 
-  notification:
-    needs: tests
+  notify:
     runs-on: ubuntu-latest
     steps:
       - name: Slack Notification
@@ -74,7 +73,7 @@ jobs:
           SLACK_ICON: https://github.com/rtCamp.png?size=48
           SLACK_MESSAGE: 'Post Content :rocket:'
           SLACK_TITLE: Post Title
-          SLACK_USERNAME: rtCamp
+          SLACK_USERNAME: Workflow Bot
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
       #Run Tests
       #- name: Run Tests
