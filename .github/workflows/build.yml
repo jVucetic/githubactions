@@ -17,7 +17,7 @@ jobs:
     permissions:
       id-token: write # required to use OIDC authentication
       contents: read
-      packages: write
+        packages: write
       checks: write
       issues: read
       pull-requests: write
