@@ -25,14 +25,6 @@ jobs:
       - name: Build with Maven And skip tests
         run: mvn --batch-mode --update-snapshots verify -DskipTests
 
-
-  #Test's job
-  tests:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-
       - name: Initialize CodeQL
         uses: github/codeql-action/init@v2
         with:
@@ -40,6 +32,14 @@ jobs:
 
       - name: Perform CodeQL Analysis
         uses: github/codeql-action/analyze@v2
+
+
+  #Test's job
+  tests:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
 
       - name: Run Unit tests
         run: mvn verify -PunitTests
