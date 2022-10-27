@@ -53,7 +53,7 @@ jobs:
           SLACK_CHANNEL: general
           SLACK_COLOR: ${{ job.status }} # or a specific color like 'good' or '#ff00ff'
           SLACK_ICON: https://github.com/rtCamp.png?size=48
-          SLACK_MESSAGE: 'Post Content :rocket:'
+          SLACK_TITLE: 'Build job :rocket:'
           SLACK_WEBHOOK: ${{ env.SLACK_WEBHOOK }}
   #Test's job
   tests:
@@ -72,7 +72,12 @@ jobs:
         if: ${{ always() }}
         uses: scacap/action-surefire-report@v1
 
-
-      #Run Tests
-      #- name: Run Tests
-     #   run: mvn -B test
+      - name: Slack Notification
+        if: always()
+        uses: rtCamp/action-slack-notify@v2
+        env:
+          SLACK_CHANNEL: general
+          SLACK_COLOR: ${{ job.status }} # or a specific color like 'good' or '#ff00ff'
+          SLACK_ICON: https://github.com/rtCamp.png?size=48
+          SLACK_TITLE: 'Tests :rocket:'
+          SLACK_WEBHOOK: ${{ env.SLACK_WEBHOOK }}
