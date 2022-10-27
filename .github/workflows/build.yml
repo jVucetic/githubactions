@@ -32,14 +32,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Run Unit tests
-        run: mvn verify -PunitTests
+        run: mvn install -PunitTests
 
       - name: Publish Unit Test Report
         if: ${{ always() }}
         uses: scacap/action-surefire-report@v1
 
       - name: Run Integration tests
-        run: mvn verify -PintegrationTests
+        run: mvn install -PintegrationTests
 
       - name: Publish Integration Test Report
         if: ${{ always() }}
