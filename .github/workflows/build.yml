@@ -46,15 +46,15 @@ jobs:
         uses: github/codeql-action/analyze@v2
 
 
-      - name: Slack Notification
-        if: always()
-        uses: rtCamp/action-slack-notify@v2
-        env:
-          SLACK_CHANNEL: general
-          SLACK_COLOR: ${{ job.status }} # or a specific color like 'good' or '#ff00ff'
-          SLACK_ICON: https://github.com/rtCamp.png?size=48
-          SLACK_TITLE: 'Build job :rocket:'
-          SLACK_WEBHOOK: ${{ env.SLACK_WEBHOOK }}
+  #    - name: Slack Notification
+ #       if: always()
+  #      uses: rtCamp/action-slack-notify@v2
+   #     env:
+   #       SLACK_CHANNEL: general
+   #       SLACK_COLOR: ${{ job.status }} # or a specific color like 'good' or '#ff00ff'
+   #       SLACK_ICON: https://github.com/rtCamp.png?size=48
+   #       SLACK_TITLE: 'Build job :rocket:'
+   #       SLACK_WEBHOOK: ${{ env.SLACK_WEBHOOK }}
   #Test's job
   tests:
     needs: build
@@ -73,7 +73,7 @@ jobs:
         uses: scacap/action-surefire-report@v1
 
       - name: Slack Notification
-        if: always()
+        if: failure()
         uses: rtCamp/action-slack-notify@v2
         env:
           SLACK_CHANNEL: general
