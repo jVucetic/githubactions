@@ -3,7 +3,7 @@ name: CI/CD Pipeline
 
 env:
   VERSION: '17'
-  SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+  SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
 
 on:
   #Manually trigger workflow runs
@@ -45,15 +45,18 @@ jobs:
       - name: Perform CodeQL Analysis
         uses: github/codeql-action/analyze@v2
 
-      - name: Slack Notification
-        if: failure()
-        uses: rtCamp/action-slack-notify@v2
+      - name: Post to a Slack channel
+        id: slack
+        uses: slackapi/slack-github-action@v1.23.0
+        with:
+          # Slack channel id, channel name, or user id to post message.
+          # See also: https://api.slack.com/methods/chat.postMessage#channels
+          # You can pass in multiple channels to post to by providing a comma-delimited list of channel IDs.
+          channel-id: 'project'
+          # For posting a simple plain text message
+          slack-message: "GitHub build result: ${{ job.status }}\n${{ github.event.pull_request.html_url || github.event.head_commit.url }}"
         env:
-          SLACK_CHANNEL: general
-          SLACK_COLOR: ${{ job.status }} # or a specific color like 'good' or '#ff00ff'
-          SLACK_ICON: https://github.com/rtCamp.png?size=48
-          SLACK_TITLE: 'Build job :rocket:'
-          SLACK_WEBHOOK: ${{ env.SLACK_WEBHOOK }}
+          SLACK_BOT_TOKEN: ${{ env.SLACK_BOT_TOKEN }}
   #Test's job
   tests:
     needs: build
@@ -71,12 +74,15 @@ jobs:
         if: ${{ always() }}
         uses: scacap/action-surefire-report@v1
 
-      - name: Slack Notification
-        if: failure()
-        uses: rtCamp/action-slack-notify@v2
-        env:
-          SLACK_CHANNEL: general
-          SLACK_COLOR: ${{ job.status }} # or a specific color like 'good' or '#ff00ff'
-          SLACK_ICON: https://github.com/rtCamp.png?size=48
-          SLACK_TITLE: 'Tests :rocket:'
-          SLACK_WEBHOOK: ${{ env.SLACK_WEBHOOK }}
+      - name: Post to a Slack channel
+          id: slack
+          uses: slackapi/slack-github-action@v1.23.0
+          with:
+            # Slack channel id, channel name, or user id to post message.
+            # See also: https://api.slack.com/methods/chat.postMessage#channels
+            # You can pass in multiple channels to post to by providing a comma-delimited list of channel IDs.
+            channel-id: 'project'
+            # For posting a simple plain text message
+            slack-message: "GitHub build result: ${{ job.status }}\n${{ github.event.pull_request.html_url || github.event.head_commit.url }}"
+          env:
+            SLACK_BOT_TOKEN: ${{ env.SLACK_BOT_TOKEN }}
