@@ -71,10 +71,11 @@ jobs:
         run: mvn verify -PintegrationTests
 
       - name: Publish Test Report
-        if: ${{ always() }}
+        if: always()
         uses: scacap/action-surefire-report@v1
 
       - name: Post to a Slack channel
+        if: failure()
         id: slack
         uses: slackapi/slack-github-action@v1.23.0
         with:
