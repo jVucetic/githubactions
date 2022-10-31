@@ -78,10 +78,10 @@ jobs:
       - uses: actions/checkout@v3
 
       - name: Run Unit tests
-        run: mvn verify -PunitTests
+        run: mvn -P unitTests test
 
       - name: Run Integration tests
-        run: mvn verify -PintegrationTests
+        run: mvn -P integrationTests test
 
       - name: Publish Test Report
         if: always()

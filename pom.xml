@@ -68,7 +68,6 @@
 						<artifactId>maven-surefire-plugin</artifactId>
 						<configuration>
 							<groups>UnitTest</groups>
-							<excludedGroups>IntegrationTest</excludedGroups>
 						</configuration>
 					</plugin>
 				</plugins>
@@ -86,7 +85,6 @@
 						<version>2.22.2</version>
 						<configuration>
 							<groups>IntegrationTest</groups>
-							<excludedGroups>UnitTest</excludedGroups>
 						</configuration>
 					</plugin>
 				</plugins>
