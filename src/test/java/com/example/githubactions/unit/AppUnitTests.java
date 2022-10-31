@@ -21,7 +21,7 @@ public class AppUnitTests {
     public void nationsLength() {
         System.out.println("unit test running");
         Integer nationsLength = dataController.getRandomNations().size();
-        assertEquals(5, nationsLength);
+        assertEquals(10, nationsLength);
     }
 
     @Test
