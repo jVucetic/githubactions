@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<packaging>pom</packaging>
 	<modules>
-		<module>githuactions-module</module>
+		<module>githubactions-module</module>
 	</modules>
 
 	<parent>
@@ -85,8 +85,9 @@
 				<plugins>
 					<plugin>
 						<artifactId>maven-surefire-plugin</artifactId>
+						<version>3.0.0-M7</version>
 						<configuration>
-							<groups>UnitTest</groups>
+							<groups>UnitTests</groups>
 						</configuration>
 					</plugin>
 				</plugins>
@@ -101,7 +102,7 @@
 				<plugins>
 					<plugin>
 						<artifactId>maven-surefire-plugin</artifactId>
-						<version>2.22.2</version>
+						<version>3.0.0-M7</version>
 						<configuration>
 							<groups>IntegrationTest</groups>
 						</configuration>
