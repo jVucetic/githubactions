@@ -32,7 +32,7 @@ jobs:
           distribution: 'adopt'
           cache: maven
       - name: Build with Maven And skip tests
-        run: mvn -B deploy -DskipTests
+        run: mvn --batch-mode --update-snapshots verify -DskipTests
 
       - name: download datadog agent
         run: |
