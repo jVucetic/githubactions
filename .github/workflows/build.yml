@@ -32,44 +32,48 @@ jobs:
           distribution: 'adopt'
           cache: maven
       - name: Build with Maven And skip tests
-        run: mvn --batch-mode --update-snapshots verify -DskipTests
+        run: mvn -B deploy -DskipTests
 
-      - name: Initialize CodeQL
-        uses: github/codeql-action/init@v2
-        with:
-          languages: java
+      - name: download datadog agent
+        run: |
+          wget --progress=dot:giga -O target/dd-java-agent.jar https://dtdg.co/latest-java-tracer
 
-      - name: Autobuild
-        uses: github/codeql-action/autobuild@v2
+ #     - name: Initialize CodeQL
+ #       uses: github/codeql-action/init@v2
+ #       with:
+ #         languages: java
 
-      - name: Perform CodeQL Analysis
+ #     - name: Autobuild
+ #       uses: github/codeql-action/autobuild@v2
+
+ #     - name: Perform CodeQL Analysis
         uses: github/codeql-action/analyze@v2
-
-      - name: Post to a Slack channel
-        if: failure()
-        id: slack
-        uses: slackapi/slack-github-action@v1.23.0
-        with:
+#
+ #     - name: Post to a Slack channel
+ #       if: failure()
+  #      id: slack
+  #      uses: slackapi/slack-github-action@v1.23.0
+  #      with:
           # Slack channel id, channel name, or user id to post message.
           # See also: https://api.slack.com/methods/chat.postMessage#channels
           # You can pass in multiple channels to post to by providing a comma-delimited list of channel IDs.
-          channel-id: 'project'
+ #         channel-id: 'project'
           # For posting a simple plain text message
-          payload: |
-            {
-              "text": "",
-              "blocks": [
-                {
-                  "type": "section",
-                  "text": {
-                    "type": "mrkdwn",
-                    "text": "GitHub Action build result: ${{ job.status }}\n${{ github.event.pull_request.html_url || github.event.head_commit.url }}"
-                  }
-                }
-              ]
-            }
-        env:
-          SLACK_BOT_TOKEN: ${{ env.SLACK_BOT_TOKEN }}
+#          payload: |
+#            {
+#              "text": "",
+ #             "blocks": [
+#                {
+#                  "type": "section",
+ #                 "text": {
+ #                   "type": "mrkdwn",
+ #                   "text": "GitHub Action build result: ${{ job.status }}\n${{ github.event.pull_request.html_url || github.event.head_commit.url }}"
+ #                 }
+ #               }
+ #             ]
+ #           }
+  #      env:
+  #        SLACK_BOT_TOKEN: ${{ env.SLACK_BOT_TOKEN }}
   #Test's job
   tests:
     needs: build
